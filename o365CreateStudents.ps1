@@ -123,22 +123,23 @@ processAccounts
 write-verbose "Done processing accounts."
 
 
-# notification that O365 mailbox settings are complete #
+# Notification that O365 mailbox settings are complete #
 write-verbose "Parent email forwarding and student Address Book Policy set."
 
 $pcuser = gci "c:\users\" -recurse -directory | where { $_.name -like 'user1' -or $_.name -like 'Administrator' }
 
-if ($pcuser.fullname -eq "C:\users\srowl") {
-    $script:creds = import-clixml 'C:\PathToFolder\auto.xml' 
+# Pulling credentials so email notifications can be sent.
+if ($pcuser.fullname -eq "C:\users\test1") {
+    $script:creds = import-clixml 'C:\PathToFolder\test1creds.xml' 
 }
 
-elseif ($pcuser.fullname -eq "C:\users\seanr") {
-    $script:creds = import-clixml 'C:\PathToFolder\auto2.xml' 
+elseif ($pcuser.fullname -eq "C:\users\test2") {
+    $script:creds = import-clixml 'C:\PathToFolder\test2creds.xml' 
 }
 
-elseif ($pcuser.fullname -eq "C:\users\Administrator") {
+elseif ($pcuser.fullname -eq "C:\users\test3") {
     try {
-        $script:creds = import-clixml 'C:\PathToFolder\auto3.xml'
+        $script:creds = import-clixml 'C:\PathToFolder\test3creds.xml'
     } 
     
     catch { 
